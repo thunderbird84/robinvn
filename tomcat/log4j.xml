@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="DEVELOPMENT" class="org.apache.log4j.FileAppender">
+        <param name="file" value="${catalina.base}/logs/robin.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="immediateFlush" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c- [%X{requestId}] %m%n"/>
+        </layout>
+    </appender>
+
+
+    <logger name="org.quartz">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="net.spy.memcached">
+        <level value="error"/>
+    </logger>
+
+    <logger name="com.mchange">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="org.apache.solr">
+        <level value="ERROR"/>
+    </logger>
+
+    <logger name="org.apache.commons">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="httpclient">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="org.apache.commons.httpclient" >
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="WARN"/>
+    </logger>
+
+    <logger name="org.springframework.amqp">
+        <level value="INFO"/>
+    </logger>
+
+    <root>
+        <level value="info"/>
+        <appender-ref ref="DEVELOPMENT"/>
+    </root>
+
+</log4j:configuration>
