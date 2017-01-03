@@ -7,7 +7,7 @@ ENV JRE_HOME /usr/lib/jvm/java-8-oracle
 # INSTALL TOMCAT
 
 RUN  mkdir -p /local/java/tomcat;
-RUN curl -o  /apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz  https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz
+RUN curl -s -o  /apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz  https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz
 #ADD https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz /
 #ADD apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz /
 #RUN mv apache-tomcat-${TOMCAT_MINOR_VERSION} ${CATALINA_HOME}
@@ -34,7 +34,7 @@ ADD http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.14/mysql-conn
 ADD log4j.xml ${CATALINA_HOME}/lib/
 
 # tomcat conf
-ADD conf ${CATALINA_HOME}/conf
+#ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
 #RUN ${CATALINA_HOME}/bin/catalina.sh run
 #ENTRYPOINT ${CATALINA_HOME}/bin/catalina.sh start
