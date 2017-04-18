@@ -5,7 +5,7 @@ ENV PLAY_HOME /local/play
 ENV JRE_HOME /usr/lib/jvm/java-8-oracle
 # INSTALL TOMCAT
 
-RUN apt-get update && apt-get install -y telnet zip python dos2unix && \
+RUN apt-get update && apt-get install -y telnet zip python dos2unix wget && \
     mkdir -p /local/java/play && \
     wget https://github.com/playframework/play1/releases/download/1.3.2/play-1.3.2.zip && \
     unzip play-1.3.2 -d   play-1.3.2 && \
