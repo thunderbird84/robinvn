@@ -1,7 +1,7 @@
 FROM isuper/java-oracle:jre_8
 MAINTAINER Vu Anh Tuan <robin.github@gmail.com>
 
-ENV PLAY_HOME /local/play
+ENV PLAY_HOME /local/play/play-1.3.2
 ENV JRE_HOME /usr/lib/jvm/java-8-oracle
 # INSTALL TOMCAT
 
@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y telnet zip python dos2unix wget && \
     wget https://github.com/playframework/play1/releases/download/1.3.2/play-1.3.2.zip && \
     unzip play-1.3.2 -d   play-1.3.2 && \
     rm play-1.3.2.zip && \
-    mv play-1.3.2 $PLAY_HOME && \
+    mv play-1.3.2 /local/play/ && \
     cd $PLAY_HOME && \
     dos2unix *
 
-ENV PATH $PATH:$PLAY_HOME:$JRE_HOME
+ENV PATH $PATH:$PLAY_HOME/:$JRE_HOME
 
 
 # Remove unneeded apps
@@ -25,8 +25,8 @@ ENV PATH $PATH:$PLAY_HOME:$JRE_HOME
 #ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
 #RUN ${CATALINA_HOME}/bin/catalina.sh run
-#ENTRYPOINT ${CATALINA_HOME}/bin/catalina.sh start
-#EXPOSE
+ENTRYPOINT play run /apps
+EXPOSE 9000 8000
 
 
 
