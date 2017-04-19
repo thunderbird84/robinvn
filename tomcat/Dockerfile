@@ -1,5 +1,5 @@
 FROM isuper/java-oracle:jre_8
-MAINTAINER Vu Anh Tuan <tuan.vu@niteco.se>
+MAINTAINER robin <robin.github@gmail.com>
 ENV TOMCAT_MAJOR_VERSION 7
 ENV TOMCAT_MINOR_VERSION 7.0.34
 ENV CATALINA_HOME /local/java/tomcat/${TOMCAT_MINOR_VERSION}

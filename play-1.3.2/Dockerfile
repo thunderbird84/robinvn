@@ -1,5 +1,5 @@
 FROM isuper/java-oracle:jre_8
-MAINTAINER Vu Anh Tuan <robin.github@gmail.com>
+MAINTAINER robin <robin.github@gmail.com>
 
 ENV PLAY_HOME /local/play/play-1.3.2
 ENV JRE_HOME /usr/lib/jvm/java-8-oracle
