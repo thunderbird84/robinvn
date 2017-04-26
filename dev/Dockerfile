@@ -1,4 +1,4 @@
-FROM isuper/java-oracle:jre_8
+FROM isuper/java-oracle:jdk_8
 MAINTAINER robin <robin.github@gmail.com>
 ENV TOMCAT_MAJOR_VERSION 7
 ENV TOMCAT_MINOR_VERSION 7.0.34
