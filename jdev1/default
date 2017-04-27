@@ -1,0 +1,33 @@
+upstream auth_backend {    
+    server localhost:8080;
+}
+
+upstream content_backend {
+    server localhost:8080;
+}
+
+upstream adapter_backend {
+    server localhost:8080;
+}
+
+upstream user_backend {
+    server localhost:8080;
+}
+
+upstream order_backend {
+    server localhost:8080;
+}
+
+upstream entilement_backend {
+    server localhost:8080;
+}
+
+server {
+	listen 80;
+	index index.html index.htm;	
+	server_name localhost;
+    resolver 127.0.0.1;
+	include /etc/nginx/sites-available/api2.conf;
+}
+
+

@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+    jdev:
+     image: robinvn/docker:dev
+     volumes:      
+       - ./robin.properties:/local/java/tomcat/7.0.34/conf/robin.properties:ro
+       - ./microservice.war:/local/java/tomcat/7.0.34/webapps/microservice.war:ro
+       - ./default:/etc/nginx/sites-available/default:ro
+     environment:
+       DB_OPTS: -Djdbc.url=mysql://{db.ip}/db_name?characterEncoding=UTF-8&amp;autoReconnect=true -Djdbc.username=root -Djdbc.password=

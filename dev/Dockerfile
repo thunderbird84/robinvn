@@ -5,7 +5,9 @@ ENV TOMCAT_MINOR_VERSION 7.0.34
 ENV CATALINA_HOME /local/java/tomcat/${TOMCAT_MINOR_VERSION}
 ENV JRE_HOME /usr/lib/jvm/java-8-oracle
 ENV SOLR_OPTS " -Dsolr.solr.home=/var/lib/solr -Dsolr.data.dir=/var/lib/solr/data -Dsolr.slave.url=http://localhost:8080/solr -Dsolr.master.url=http://localhost:8080/solr "
-ENV CATALINA_OPTS ${SOLR_OPTS}
+ENV DB_OPTS " "
+ENV MORE_OPTS " "
+ENV CATALINA_OPTS ${SOLR_OPTS} ${DB_OPTS} ${MORE_OPTS}
 # INSTALL TOMCAT
 
 RUN  mkdir -p /local/java/tomcat;
