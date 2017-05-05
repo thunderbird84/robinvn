@@ -1,4 +1,4 @@
-FROM isuper/java-oracle:jre_8
+FROM isuper/java-oracle:jdk_8
 MAINTAINER robin <robin.github@gmail.com>
 
 ENV PLAY_HOME /local/play/play-1.3.2
@@ -25,7 +25,7 @@ ENV PATH $PATH:$PLAY_HOME/:$JRE_HOME
 #ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
 #RUN ${CATALINA_HOME}/bin/catalina.sh run
-ENTRYPOINT play run /apps
+ENTRYPOINT  play run
 EXPOSE 9000 8000
 
 
