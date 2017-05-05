@@ -25,7 +25,7 @@ ENV PATH $PATH:$PLAY_HOME/:$JRE_HOME
 #ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
 #RUN ${CATALINA_HOME}/bin/catalina.sh run
-ENTRYPOINT  play run
+ENTRYPOINT  play run apps
 EXPOSE 9000 8000
 
 
