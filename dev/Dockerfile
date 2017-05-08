@@ -1,7 +1,7 @@
 FROM isuper/java-oracle:jdk_8
 MAINTAINER robin <robin.github@gmail.com>
-ENV TOMCAT_MAJOR_VERSION 7
-ENV TOMCAT_MINOR_VERSION 7.0.34
+ENV TOMCAT_MAJOR_VERSION 6
+ENV TOMCAT_MINOR_VERSION 6.0.53
 ENV CATALINA_HOME /local/java/tomcat/${TOMCAT_MINOR_VERSION}
 ENV JPDA_TRANSPORT="dt_socket"
 ENV JPDA_ADDRESS="8888"
@@ -40,12 +40,12 @@ ADD log4j.xml ${CATALINA_HOME}/lib/
 ADD tomcatuser.xml ${CATALINA_HOME}/conf/tomcat-users.xml
 ADD solr /var/lib/solr
 RUN sed -i -e 's/-l 127\.0.\0\.1/-l 0\.0\.0\.0/g' /etc/memcached.conf
-
+RUN ln -sf ${CATALINA_HOME} /tomcat
 # tomcat conf
 #ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
 #RUN ${CATALINA_HOME}/bin/catalina.sh run
-ENTRYPOINT service memcached start && service qpidd start && service nginx start &&  ${CATALINA_HOME}/bin/catalina.sh run
+ENTRYPOINT service memcached start && service qpidd start && service nginx start &&  ${CATALINA_HOME}/bin/catalina.sh start && tail -f ${CATALINA_HOME}/logs/*.log
 EXPOSE 8080 11211 11212 80 5672 8888
 
 
