@@ -37,6 +37,8 @@ RUN curl -s -o ${CATALINA_HOME}/lib/mail-1.4.3.jar  http://central.maven.org/mav
     curl -s -o ${CATALINA_HOME}/webapps/solr.war  http://central.maven.org/maven2/org/apache/solr/solr/3.4.0/solr-3.4.0.war
 ADD log4j.xml ${CATALINA_HOME}/lib/
 ADD solr /var/lib/solr
+RUN sed -i -e 's/-l 127\.0.\0\.1/-l 0\.0\.0\.0/g' /etc/memcached.conf
+
 # tomcat conf
 #ADD conf ${CATALINA_HOME}/conf
 #ADD tomcat_wrapper.sh /opt/tomcat/bin/
