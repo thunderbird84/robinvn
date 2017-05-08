@@ -2,7 +2,7 @@
 <tomcat-users>
   <role rolename="tomcat"/>
   <role rolename="role1"/>
-  <user username="tomcat" password="passw0rd" roles="tomcat"/>
+  <user username="tomcat" password="passw0rd" roles="tomcat,manager-gui"/>
   <user username="both" password="passw0rd" roles="tomcat,role1"/>
   <user username="role1" password="passw0rd" roles="role1"/>
 </tomcat-users>
