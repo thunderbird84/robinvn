@@ -1,0 +1,27 @@
+version: "2"
+services:
+  mysql:
+    image: mysql:5.7
+    hostname: mysql.dev.robin
+    environment:
+       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+       - /var/opt/mysql:/var/lib/mysql
+
+  solr:
+    image: indexing/solr
+    hostname: solr.dev.robin   
+    volumes:
+       - /var/opt/solr/data:/var/lib/solr/data
+
+  qpid:
+    image: indexing/qpid
+    hostname: qpid.dev.robin   
+    ports:      
+       - 5672:5672
+
+  memcached:
+    image: memcached:alpine     
+    hostname: memcached.dev.robin
+    ports:      
+       - 11211:11211
