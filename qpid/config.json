@@ -1,0 +1,75 @@
+{
+  "id" : "110449ac-61ec-4d52-ab89-0cf99dc6a5f9",
+  "name" : "${broker.name}",
+  "modelVersion" : "3.0",
+  "defaultVirtualHost" : "localhost",
+  "authenticationproviders" : [ {
+    "id" : "efc19b33-9eed-442d-ba38-6232212786f3",
+    "name" : "passwordFile",
+    "type" : "PlainPasswordFile",
+    "path" : "${qpid.home_dir}${file.separator}etc${file.separator}passwd",
+    "secureOnlyMechanisms" : [ ],
+    "preferencesproviders" : [ {
+      "id" : "0920adf4-eaba-4a88-9bde-9cfdf552ffa5",
+      "name" : "fileSystemPreferences",
+      "type" : "FileSystemPreferences",
+      "path" : "${qpid.work_dir}${file.separator}user.preferences.json"
+    } ]
+  } ],
+  "plugins" : [ {
+    "id" : "1e193b8e-3d09-46de-9fc6-3562d020f8ea",
+    "type" : "MANAGEMENT-HTTP",
+    "httpBasicAuthenticationEnabled" : true,
+    "name" : "httpManagement"
+  }, {
+    "id" : "3c0bd6fa-1480-4c75-91e4-c883fb2ff34b",
+    "type" : "MANAGEMENT-JMX",
+    "name" : "jmxManagement"
+  } ],
+  "ports" : [ {
+    "id" : "67b765b8-20c5-4896-b37c-0766bfaa280b",
+    "name" : "AMQP",
+    "port" : "${qpid.amqp_port}",
+    "authenticationProvider" : "passwordFile",
+    "secureOnlyMechanisms" : [ ],
+    "virtualhostaliases" : [ {
+      "id" : "a0d95d91-67ce-480c-b45b-a8cbe708f6dd",
+      "name" : "defaultAlias",
+      "type" : "defaultAlias"
+    }, {
+      "id" : "358dd3cc-7d97-408a-9b3d-9f90a1e2adfc",
+      "name" : "hostnameAlias",
+      "type" : "hostnameAlias"
+    }, {
+      "id" : "5f0b1079-26eb-4cfc-8fc5-3ae8e6d3bad2",
+      "name" : "nameAlias",
+      "type" : "nameAlias"
+    } ]
+  }, {
+    "id" : "6f5a0969-8048-4b97-a9ae-5c589ad23b1f",
+    "name" : "HTTP",
+    "port" : "${qpid.http_port}",
+    "authenticationProvider" : "passwordFile",
+    "protocols" : [ "HTTP" ]
+  }, {
+    "id" : "f5e540ed-c044-49eb-8e43-e118b93827d4",
+    "name" : "JMX_CONNECTOR",
+    "port" : "${qpid.jmx_port}",
+    "authenticationProvider" : "passwordFile",
+    "protocols" : [ "JMX_RMI" ]
+  }, {
+    "id" : "e3a711fc-89ab-4d67-b1c7-2cb57f6fc8e6",
+    "name" : "RMI_REGISTRY",
+    "port" : "${qpid.rmi_port}",
+    "protocols" : [ "RMI" ]
+  } ],
+  "virtualhostnodes" : [ {
+    "name" : "default",
+    "type" : "JSON",
+    "desiredState" : "ACTIVE",
+    "context" : {
+    },
+    "storePath" : "/etc/qpid/vhost.json/",
+    "virtualHostInitialConfiguration" : "{}"
+  } ]
+}

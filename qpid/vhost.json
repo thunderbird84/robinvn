@@ -1,0 +1,12 @@
+{
+  "id" : "9000b02a-e6eb-42d7-b1ec-f9bbcd7555b7",
+  "type" : "Memory",
+  "context" : {
+  },
+  "name" : "bonnier",
+  "modelVersion" : "3.0",
+  "exchanges" : [{
+    "name" : "bonnier.event",
+    "type" : "topic"
+  } ]
+}
