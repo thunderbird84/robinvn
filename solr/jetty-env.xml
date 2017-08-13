@@ -1,0 +1,10 @@
+<?xml version="1.0"?> 
+ <Configure class="org.eclipse.jetty.webapp.WebAppContext">
+   <New id="solHome"  class="org.eclipse.jetty.plus.jndi.EnvEntry">
+     <Arg>/solr/home</Arg>
+     <Arg type="java.lang.String">/app</Arg>
+     <Call name="bindToENC">
+        <Arg>/solr/home</Arg>
+    </Call>
+   </New>    
+ </Configure>
