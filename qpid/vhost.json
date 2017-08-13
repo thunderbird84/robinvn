@@ -3,10 +3,10 @@
   "type" : "Memory",
   "context" : {
   },
-  "name" : "bonnier",
+  "name" : "default",
   "modelVersion" : "3.0",
   "exchanges" : [{
-    "name" : "bonnier.event",
+    "name" : "robin.event",
     "type" : "topic"
   } ]
 }

@@ -1,4 +1,4 @@
-FROM indexing/run-war:95a33eb-dirty
+FROM indexing/run-war
 MAINTAINER robin <robin.github@gmail.com>
 
 EXPOSE 80
