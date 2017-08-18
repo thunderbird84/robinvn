@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <echo file="/extras/home/tuanvu/tmp/d/robinvn/jetty/target/docker/bin/classpath" append="true">:./libs/robin-jetty-1.0-SNAPSHOT.r20170721.jar</echo>
+</target>
+</project>

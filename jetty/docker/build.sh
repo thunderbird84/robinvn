@@ -7,20 +7,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DOCKER_TAG=$(git describe --match=NeVeRmAtCh --always --abbrev=7 --dirty)
+TAGS=$(git describe --match=NeVeRmAtCh --always --abbrev=7 --dirty)
 
-echo "##teamcity[setParameter name='docker-tag' value='$DOCKER_TAG']"
 
 # user-entitled
-docker build -t splus-docker.repo.dex.nu/user-entitled:$DOCKER_TAG --label team=serviceplus --label application=user-entitled user-entitled/target/docker
-docker push splus-docker.repo.dex.nu/user-entitled:$DOCKER_TAG
-docker rmi --no-prune splus-docker.repo.dex.nu/user-entitled:$DOCKER_TAG
+docker build -t indexing/run-war:$TAGS  target/docker
+docker login -u indexing
+docker push indexing/run-war:$TAGS
+docker rmi --no-prune indexing/run-war:$TAGS
 
-# flow-user-entitled
-docker build -t splus-docker.repo.dex.nu/flow-user-entitled:$DOCKER_TAG --label team=serviceplus --label application=flow-user-entitled flow/flow-user-entitled/target/docker
-docker push splus-docker.repo.dex.nu/flow-user-entitled:$DOCKER_TAG
-docker rmi --no-prune splus-docker.repo.dex.nu/flow-user-entitled:$DOCKER_TAG
 
-echo To ful-deploy to lab invoke docker/deploy_lab.sh $DOCKER_TAG
-echo
-echo Finished docker build for docker_tag: $DOCKER_TAG

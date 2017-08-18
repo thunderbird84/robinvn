@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure id="wac" class="org.eclipse.jetty.webapp.WebAppContext">
+    <New  id="mailSesion" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>mail/SmtpServer</Arg>
+        <Arg>
+            <New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
+                <Set name="user">robin@domain.com</Set>
+                <Set name="password"></Set>
+                <Set name="properties">
+                    <New class="java.util.Properties">
+                        <Put name="mail.host">mail.domain.com</Put>
+                        <Put name="mail.debug">true</Put>
+                        <Put name="mail.smtp.auth">true</Put>
+                    </New>
+                </Set>
+            </New>
+        </Arg>
+        <Call name="bindToENC">
+            <Arg>mail/SmtpServer</Arg>
+        </Call>
+    </New>
+</Configure>

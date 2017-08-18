@@ -1,30 +1,41 @@
 package robin.jetty;
 
+import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.Slf4jRequestLog;
+import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.webapp.WebInfConfiguration;
+import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 import javax.naming.NamingException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 
 class JettyMain {
-    private static final byte[] configs ={0x73,0x65,0x72,0x76,0x69,0x63,0x65,0x70,0x6C,0x75,0x73};
-    private static String env="dev";
-    static{
-        if(!"".equals(System.getProperty("env",""))){
-            env=System.getProperty("env","dev");
-        }
+    private static String env = "dev";
+    private static String baseDir = "/app";
+
+    static {
+        setConfigs();
     }
 
     public static void main(String[] args) throws Exception {
-        System.setProperty("catalina.home","/app/"+env);
+
+        startServer();
+    }
+
+    public static void startServer() throws Exception {
         Server server = new Server();
         ServerConnector http = new ServerConnector(server);
-        http.setPort(Integer.valueOf(System.getProperty("jetty.http.port", "8488")));
+        http.setPort(Integer.valueOf(System.getProperty("jetty.http.port", "80")));
         server.addConnector(http);
-
+        moreSettings(server);
         Slf4jRequestLog rl = new Slf4jRequestLog();
         rl.setLogDateFormat(null);
         rl.setLogLatency(true);
@@ -35,7 +46,7 @@ class JettyMain {
         context.setParentLoaderPriority(true);
         context.setContextPath("/");
         setupJndiResources(context);
-        context.setWar("/wars/app.war");
+        context.setWar(System.getProperty("war.file", "/wars/app.war"));
         server.setHandler(context);
         server.start();
 
@@ -44,16 +55,66 @@ class JettyMain {
         server.join();
     }
 
-    public static void setupJndiResources(WebAppContext context) throws NamingException{
-        org.eclipse.jetty.jndi.factories.MailSessionReference mailref = new org.eclipse.jetty.jndi.factories.MailSessionReference();
-        mailref.setUser("CHANGE-ME");
-        mailref.setPassword("CHANGE-ME");
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.host","CHANGE-ME");
-        props.put("mail.from","CHANGE-ME");
-        props.put("mail.debug", "false");
-        mailref.setProperties(props);
-        org.eclipse.jetty.plus.jndi.Resource xxxmail = new org.eclipse.jetty.plus.jndi.Resource("mail/SmtpServer", mailref);
+    public static void setupJndiResources(WebAppContext context) throws NamingException {
+        try {
+            EnvConfiguration envConfiguration = new EnvConfiguration();
+            File file = new File(baseDir + "/jetty-"+env +".xml");
+            URL url;
+            if(file.exists() && !file.isDirectory()) {
+                url = file.toURI().toURL();
+            }else{
+                url = JettyMain.class.getClassLoader().getResource("jetty-"+env +".xml");
+            }
+
+            if (url != null){
+                envConfiguration.setJettyEnvXml(url);
+                context.setConfigurations(new Configuration[]{
+                        new WebInfConfiguration(),
+                        envConfiguration,
+                        new WebXmlConfiguration()
+                });
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void moreSettings(Server server) {
+        System.setProperty("java.naming.factory.url.pkgs",
+                "org.eclipse.jetty.jndi");
+        System.setProperty("java.naming.factory.initial",
+                "org.eclipse.jetty.jndi.InitialContextFactory");
+
+    }
+
+    public static void setConfigs() {
+        if (!"".equals(System.getProperty("base.dir", ""))) {
+            baseDir = System.getProperty("base.dir", "dev");
+        }
+        try {
+            Properties prop = new Properties();
+            File f = new File(baseDir + "/jvm.properties");
+            InputStream is = null;
+            if (f.exists() && !f.isDirectory()) {
+                is = new FileInputStream(baseDir + "/jvm.properties");
+            }
+            if (is != null) {
+                prop.load(is);
+                for (Object key : prop.keySet()) {
+                    System.setProperty((String) key, (String) prop.get(key));
+                }
+            }
+
+        } catch (Exception e) {
+        }
+
+        if (!"".equals(System.getProperty("env", ""))) {
+            env = System.getProperty("env", "dev");
+        }
+        if ("".equals(System.getProperty("catalina.home", ""))) {
+            System.setProperty("catalina.home", baseDir + "/" + env);
+        }
     }
 }
+
