@@ -1,0 +1,11 @@
+{
+  "exchanges": [
+    {
+      "name": "robin.event",
+      "vhost": "default",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false     
+    }
+  ]
+}

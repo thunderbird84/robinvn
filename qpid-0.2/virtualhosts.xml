@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<virtualhosts>
+    <default>localhost</default>
+    <virtualhost>
+        <name>localhost</name>
+        <localhost>
+            <store>
+                <class>org.apache.qpid.server.store.MemoryMessageStore
+                </class>
+            </store>
+
+            <exchanges>
+                <exchange>
+                    <type>topic</type>
+                    <name>robin.event</name>
+                </exchange>
+            </exchanges>
+
+            <housekeeping>
+                <threadCount>2</threadCount>
+                <checkPeriod>20000</checkPeriod>
+            </housekeeping>
+
+        </localhost>
+    </virtualhost>
+</virtualhosts>
+
