@@ -1,0 +1,3 @@
+prometheus:
+    build: .
+    hostname: prometheus.dev.robin   

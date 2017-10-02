@@ -1,0 +1,5 @@
+grafana:
+    build: .
+    hostname: grafana.dev.robin       
+    volumes:
+        - ./data:/var/lib/grafana
