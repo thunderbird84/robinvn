@@ -8,5 +8,22 @@
   "exchanges" : [{
     "name" : "robin.event",
     "type" : "topic"
-  } ]
+  },
+  {
+    "name" : "amq.direct",
+    "type" : "direct"
+  },
+  {
+    "name" : "amq.fanout",
+    "type" : "fanout"
+  },
+  {
+    "name" : "amq.match",
+    "type" : "headers"
+  },
+  {
+    "name" : "amq.topic",
+    "type" : "topic"
+  }
+ ]
 }

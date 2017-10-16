@@ -5,7 +5,7 @@ EXPOSE 5672
 
 WORKDIR /app/
 
-RUN wget --output-document qpid.tar.gz http://mirrors.viethosting.com/apache/qpid/0.32/binaries/qpid-broker-0.32-bin.tar.gz && \
+RUN wget -O qpid.tar.gz http://mirrors.viethosting.com/apache/qpid/0.32/binaries/qpid-broker-0.32-bin.tar.gz && \
     tar xvzf  qpid.tar.gz && rm qpid.tar.gz &&\
     cd qpid-broker/0.32 && mv * /app/
 

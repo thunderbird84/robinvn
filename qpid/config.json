@@ -2,7 +2,7 @@
   "id" : "110449ac-61ec-4d52-ab89-0cf99dc6a5f9",
   "name" : "${broker.name}",
   "modelVersion" : "3.0",
-  "defaultVirtualHost" : "localhost",
+  "defaultVirtualHost" : "default",
   "authenticationproviders" : [ {
     "id" : "efc19b33-9eed-442d-ba38-6232212786f3",
     "name" : "passwordFile",

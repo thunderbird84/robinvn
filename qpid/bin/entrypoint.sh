@@ -1,4 +1,8 @@
 #!/bin/sh
+if [ -n "$EXCHANGE" ]
+then   
+    sed -i -e "s/robin.event/$EXCHANGE/g" /etc/qpid/vhost.json
+fi
 
 exec bin/qpid-java \
     -cp $(cat bin/classpath) \
