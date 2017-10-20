@@ -25,3 +25,7 @@ services:
     hostname: memcached.dev.robin
     ports:      
        - 11211:11211
+
+  prometheus:
+    build: ../prometheus
+    hostname: prometheus.dev.robin   
