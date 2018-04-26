@@ -34,6 +34,7 @@ class JettyMain {
         Server server = new Server();
         ServerConnector http = new ServerConnector(server);
         http.setPort(Integer.valueOf(System.getProperty("jetty.http.port", "80")));
+        System.setProperty("org.mortbay.xml.XmlParser.Validating", "false");
         server.addConnector(http);
         moreSettings(server);
         Slf4jRequestLog rl = new Slf4jRequestLog();
