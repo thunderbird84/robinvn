@@ -1,6 +1,8 @@
 **/.idea/**
+**/*.tar.gz
 *.iml
-*/target/**
-*/node_modules
+/target
+**/target
+node_modules/
 */build
 
