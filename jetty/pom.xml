@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <buildNumber>20170721</buildNumber>
-        <jetty.version>9.4.6.v20170531</jetty.version>
+        <jetty.version>9.4.11</jetty.version>
 
     </properties>
     <dependencies>
